@@ -1,0 +1,8 @@
+User-agent: *
+Allow: /
+
+Disallow: /adminlogin
+Disallow: /dashboard
+Disallow: /thank-you
+
+Sitemap: https://www.folazay.com/sitemap.xml

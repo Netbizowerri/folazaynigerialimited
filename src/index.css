@@ -1,0 +1,29 @@
+@import "tailwindcss";
+
+@theme {
+  --color-primary: #1A5086;
+  --color-cta: #DDAF2D;
+  --color-primary-dark: #12385D;
+  --color-cta-dark: #B38E24;
+}
+
+@layer base {
+  body {
+    @apply bg-white;
+    background-image: 
+      linear-gradient(to right, rgba(26, 80, 134, 0.04) 1px, transparent 1px),
+      linear-gradient(to bottom, rgba(26, 80, 134, 0.04) 1px, transparent 1px);
+    background-size: 50px 50px;
+    background-color: #ffffff;
+    background-attachment: fixed;
+  }
+}
+
+@layer utilities {
+  .bg-subtle-pattern {
+    background-image: 
+      linear-gradient(to right, rgba(26, 80, 134, 0.06) 1px, transparent 1px),
+      linear-gradient(to bottom, rgba(26, 80, 134, 0.06) 1px, transparent 1px);
+    background-size: 50px 50px;
+  }
+}
