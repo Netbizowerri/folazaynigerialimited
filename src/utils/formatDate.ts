@@ -1,41 +1,26 @@
-import { Timestamp } from 'firebase/firestore';
+type DateLike = Date | string | null | undefined;
 
-export const formatDate = (date: Date | Timestamp | string | null | undefined): string => {
+const toDate = (date: DateLike): Date => {
+  if (!date) return new Date();
+  if (typeof date === 'string') return new Date(date);
+  return date;
+};
+
+export const formatDate = (date: DateLike): string => {
   if (!date) return 'N/A';
-  
-  let d: Date;
-  if (date instanceof Timestamp) {
-    d = date.toDate();
-  } else if (typeof date === 'string') {
-    d = new Date(date);
-  } else {
-    d = date;
-  }
-  
   try {
     return new Intl.DateTimeFormat('en-NG', {
       day: 'numeric',
       month: 'long',
       year: 'numeric'
-    }).format(d);
-  } catch (e) {
-    console.error('Error formatting date:', e);
+    }).format(toDate(date));
+  } catch {
     return 'Invalid Date';
   }
 };
 
-export const formatDateTime = (date: Date | Timestamp | string | null | undefined): string => {
+export const formatDateTime = (date: DateLike): string => {
   if (!date) return 'N/A';
-  
-  let d: Date;
-  if (date instanceof Timestamp) {
-    d = date.toDate();
-  } else if (typeof date === 'string') {
-    d = new Date(date);
-  } else {
-    d = date;
-  }
-  
   try {
     return new Intl.DateTimeFormat('en-NG', {
       day: 'numeric',
@@ -43,9 +28,8 @@ export const formatDateTime = (date: Date | Timestamp | string | null | undefine
       year: 'numeric',
       hour: 'numeric',
       minute: 'numeric'
-    }).format(d);
-  } catch (e) {
-    console.error('Error formatting datetime:', e);
+    }).format(toDate(date));
+  } catch {
     return 'Invalid Date';
   }
 };

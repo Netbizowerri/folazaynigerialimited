@@ -1,8 +1,15 @@
 import { sendToPrivyr } from './webhookService';
 
-export const submitBooking = async (formData: any, _serviceSlug: string, serviceName: string) => {
+interface BookingFormData {
+  fullName: string;
+  email: string;
+  phone: string;
+  additionalNotes?: string;
+  serviceSpecificFields?: Record<string, unknown>;
+}
+
+export const submitBooking = async (formData: BookingFormData, _serviceSlug: string, serviceName: string) => {
   try {
-    // Trigger Webhook
     await sendToPrivyr({
       name: formData.fullName,
       email: formData.email,
@@ -13,9 +20,10 @@ export const submitBooking = async (formData: any, _serviceSlug: string, service
       submittedAt: new Date().toISOString(),
     });
 
-    return { success: true, id: 'privyr-booking' };
-  } catch (error: any) {
+    return { success: true as const, id: 'privyr-booking' };
+  } catch (error: unknown) {
+    const message = error instanceof Error ? error.message : 'Unknown error';
     console.error('Error submitting booking:', error);
-    return { success: false, error: error.message };
+    return { success: false as const, error: message };
   }
 };

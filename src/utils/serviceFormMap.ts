@@ -1,3 +1,5 @@
+import type { ComponentType } from 'react';
+import type { UseFormRegister, FieldErrors } from 'react-hook-form';
 import { 
   EstateForm, 
   GeneralTradingForm, 
@@ -8,7 +10,12 @@ import {
   ContractsForm 
 } from '../components/booking/forms';
 
-export const serviceFormMap: Record<string, any> = {
+interface FormComponentProps {
+  register: UseFormRegister<any>;
+  errors: FieldErrors;
+}
+
+export const serviceFormMap: Record<string, ComponentType<FormComponentProps>> = {
   'estate-development-land-brokerage': EstateForm,
   'general-trading': GeneralTradingForm,
   'agriculture-farming': AgricultureForm,

@@ -22,8 +22,7 @@ export const sendToPrivyr = async (data: WebhookData) => {
 
     await axios.post(webhookUrl, data);
     console.log('Webhook sent to Privyr successfully');
-  } catch (error) {
+  } catch (error: unknown) {
     console.error('Error sending webhook to Privyr:', error);
-    // We don't throw here to ensure the main form submission isn't blocked by webhook failure
   }
 };

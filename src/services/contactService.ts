@@ -1,8 +1,15 @@
 import { sendToPrivyr } from './webhookService';
 
-export const submitContactForm = async (formData: any) => {
+interface ContactFormData {
+  fullName: string;
+  email: string;
+  phone: string;
+  subject: string;
+  message: string;
+}
+
+export const submitContactForm = async (formData: ContactFormData) => {
   try {
-    // Trigger Webhook for contact
     await sendToPrivyr({
       name: formData.fullName,
       email: formData.email,
@@ -13,9 +20,10 @@ export const submitContactForm = async (formData: any) => {
       submittedAt: new Date().toISOString(),
     });
 
-    return { success: true, id: 'privyr-submission' };
-  } catch (error: any) {
+    return { success: true as const, id: 'privyr-submission' };
+  } catch (error: unknown) {
+    const message = error instanceof Error ? error.message : 'Unknown error';
     console.error('Error submitting contact form:', error);
-    return { success: false, error: error.message };
+    return { success: false as const, error: message };
   }
 };

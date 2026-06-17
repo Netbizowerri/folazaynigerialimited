@@ -1,4 +1,4 @@
-import { Routes, Route } from 'react-router-dom';
+import { Routes, Route, Navigate } from 'react-router-dom';
 import { HelmetProvider } from 'react-helmet-async';
 
 // Layouts
@@ -36,6 +36,7 @@ export default function App() {
         <Route path="/" element={<RootLayout />}>
           <Route index element={<HomePage />} />
           <Route path={ROUTES.ABOUT} element={<AboutPage />} />
+          <Route path="/services" element={<Navigate to="/#services-preview" replace />} />
           <Route path={ROUTES.SERVICES.ESTATE} element={<EstatePage />} />
           <Route path={ROUTES.SERVICES.TRADING} element={<GeneralTradingPage />} />
           <Route path={ROUTES.SERVICES.AGRICULTURE} element={<AgriculturePage />} />

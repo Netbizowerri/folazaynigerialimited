@@ -30,7 +30,7 @@ export const SERVICES: Service[] = [
     shortDescription: 'Acquisition, development, and brokerage of high-value properties in Nigeria.',
     description: 'We specialize in the acquisition, development, and sale of premium landed properties. Our brokerage services connect buyers with verified land and property assets, ensuring transparency and growth.',
     icon: Buildings,
-    image: 'https://i.ibb.co/bM4FXMRT/FOLAZAY-1.jpg'
+    image: 'https://i.ibb.co/TBgpmDZb/Folazay-1.jpg'
   },
   {
     id: 'trading',
@@ -41,7 +41,7 @@ export const SERVICES: Service[] = [
     shortDescription: 'Reliable supply chain solutions and general merchant services.',
     description: 'Folazay Nigeria Limited serves as a major player in general trading, facilitating the supply and distribution of various goods with a focus on quality procurement and logistics excellence.',
     icon: Package,
-    image: 'https://i.ibb.co/0RBNgLNZ/FOLAZAY-3.jpg'
+    image: 'https://i.ibb.co/wFKPSnDm/Folazay-2.jpg'
   },
   {
     id: 'agriculture',
@@ -52,7 +52,7 @@ export const SERVICES: Service[] = [
     shortDescription: 'Modern crop cultivation, livestock farming, and processing.',
     description: 'We are committed to sustainable agriculture through modern crop cultivation and livestock farming. Our processing facilities add value to raw produce, driving food security and investment.',
     icon: Plant,
-    image: 'https://i.ibb.co/FkfVRhMh/FOLAZAY-2.jpg'
+    image: 'https://i.ibb.co/hx7LjYLy/Folazay-3.jpg'
   },
   {
     id: 'farm-products',
@@ -63,7 +63,7 @@ export const SERVICES: Service[] = [
     shortDescription: 'Distribution of high-quality fresh and processed farm produce.',
     description: 'Our distribution network supplies wholesalers, retailers, and final consumers with high-quality farm produce, bridging the gap between rural producers and urban markets.',
     icon: Basket,
-    image: 'https://i.ibb.co/FbGH95GV/FOLAZAY-4.jpg'
+    image: 'https://i.ibb.co/Z6qm48bx/Folazay-4.jpg'
   },
   {
     id: 'financial',
@@ -74,7 +74,7 @@ export const SERVICES: Service[] = [
     shortDescription: 'Expert advisory and investment in financial instruments.',
     description: 'We provide professional portfolio advisory services and strategic investment opportunities in shares and financial instruments, tailored to meet diverse risk appetites.',
     icon: ChartLineUp,
-    image: 'https://i.ibb.co/Kzchs0BV/FOLAZAY-5.jpg'
+    image: 'https://i.ibb.co/Xf2KxtJy/Folazay-5.jpg'
   },
   {
     id: 'petroleum',
@@ -85,7 +85,7 @@ export const SERVICES: Service[] = [
     shortDescription: 'Supply and distribution of PMS, AGO, DPK, and lubricants.',
     description: 'As a trusted supplier in the energy sector, we distribute high-quality petroleum products, including PMS, AGO, and DPK, ensuring reliable energy supply for businesses and individuals.',
     icon: Drop,
-    image: 'https://i.ibb.co/ynCpp3KY/FOLAZAY-6.jpg'
+    image: 'https://i.ibb.co/qFkF5KWd/Folazay-6.jpg'
   },
   {
     id: 'contracts',

@@ -17,6 +17,7 @@ RewriteRule ^ /index.html [QSA,L]
   Header always set X-XSS-Protection "1; mode=block"
   Header always set Referrer-Policy "strict-origin-when-cross-origin"
   Header always set Permissions-Policy "camera=(), microphone=(), geolocation=()"
+  Header always set Content-Security-Policy "default-src 'self'; script-src 'self' 'unsafe-inline' 'unsafe-eval'; style-src 'self' 'unsafe-inline'; img-src 'self' https://i.ibb.co https://folazay.com data:; font-src 'self'; connect-src 'self' https://privyr.com; frame-src 'none'; object-src 'none'"
 </IfModule>
 
 # Gzip Compression

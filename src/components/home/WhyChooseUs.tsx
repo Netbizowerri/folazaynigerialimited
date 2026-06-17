@@ -1,6 +1,7 @@
 import { motion } from 'motion/react';
 import { ShieldCheck, UsersThree, Lightbulb, Handshake, TrendUp, SquaresFour } from '@phosphor-icons/react';
 import SectionHeader from '../common/SectionHeader';
+import { fadeInUp } from '../../utils/motion';
 
 const WhyChooseUs = () => {
   const strengths = [
@@ -32,29 +33,37 @@ const WhyChooseUs = () => {
   ];
 
   return (
-    <section className="py-24 bg-[#001C26] text-white">
-      <div className="max-w-7xl mx-auto px-6 md:px-12">
-        <SectionHeader 
+    <section className="py-24 bg-[#001C26] text-white relative overflow-hidden">
+      {/* Subtle grid */}
+      <div className="absolute inset-0 opacity-[0.03] pointer-events-none">
+        <div className="absolute inset-0 bg-[radial-gradient(circle_at_50%_50%,rgba(255,255,255,1)_1px,transparent_1px)] [background-size:40px_40px]" />
+      </div>
+
+      <div className="relative z-10 max-w-7xl mx-auto px-6 md:px-12">
+        <SectionHeader
           title="Why Choose Folazay?"
           subtitle="Our core strengths drive excellence and reliability in everything we do."
           light
           centered={false}
         />
 
-        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-5 gap-8">
+        <motion.div
+          initial="hidden"
+          whileInView="visible"
+          viewport={{ once: true, margin: "-30px" }}
+          className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-5 gap-6 lg:gap-8"
+        >
           {strengths.map((item, index) => {
             const Icon = item.icon || Handshake;
             return (
               <motion.div
                 key={index}
-                initial={{ opacity: 0, scale: 0.9 }}
-                whileInView={{ opacity: 1, scale: 1 }}
-                viewport={{ once: true }}
-                transition={{ delay: index * 0.1 }}
-                className="text-center p-8 rounded-2xl border border-gray-800 hover:border-[#DDAF2D] transition-all duration-300 group"
+                variants={fadeInUp}
+                transition={{ delay: index * 0.08 }}
+                className="text-center p-8 rounded-2xl border border-white/5 bg-white/[0.02] hover:bg-white/[0.06] hover:border-[#DDAF2D]/40 transition-all duration-500 group"
               >
-                <div className="w-16 h-16 bg-gray-800 rounded-full flex items-center justify-center mx-auto mb-6 group-hover:bg-[#DDAF2D] transition-colors duration-300">
-                  <Icon size={32} className="text-[#DDAF2D] group-hover:text-[#1C1C1C] transition-colors duration-300" />
+                <div className="w-16 h-16 rounded-full flex items-center justify-center mx-auto mb-6 bg-white/5 group-hover:bg-[#DDAF2D] transition-colors duration-500">
+                  <Icon size={28} className="text-[#DDAF2D] group-hover:text-[#1C1C1C] transition-colors duration-500" />
                 </div>
                 <h3 className="font-heading text-lg font-bold mb-3 text-white">
                   {item.title}
@@ -65,7 +74,7 @@ const WhyChooseUs = () => {
               </motion.div>
             );
           })}
-        </div>
+        </motion.div>
       </div>
     </section>
   );

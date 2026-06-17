@@ -1,11 +1,12 @@
-import { useState, useTransition } from 'react';
+import { useState } from 'react';
 import { useForm } from 'react-hook-form';
 import { zodResolver } from '@hookform/resolvers/zod';
 import { useSearchParams, useNavigate } from 'react-router-dom';
 import { motion, AnimatePresence } from 'motion/react';
 import { CaretLeft, CheckCircle } from '@phosphor-icons/react';
+import type { z } from 'zod';
 
-import { SERVICES } from '../../constants/services';
+import { SERVICES, type Service } from '../../constants/services';
 import { serviceFormMap } from '../../utils/serviceFormMap';
 import { globalSchema, estateSchema, tradingSchema, agricultureSchema, farmProductsSchema, financialSchema, petroleumSchema, contractsSchema } from '../../utils/validators';
 import { submitBooking } from '../../services/bookingService';
@@ -15,7 +16,7 @@ import ServiceSelector from './ServiceSelector';
 import Button from '../common/Button';
 import { ROUTES } from '../../constants/routes';
 
-const schemas: Record<string, any> = {
+const schemas: Record<string, z.ZodObject<any>> = {
   'estate-development-land-brokerage': estateSchema,
   'general-trading': tradingSchema,
   'agriculture-farming': agricultureSchema,
@@ -28,11 +29,11 @@ const schemas: Record<string, any> = {
 const BookingForm = () => {
   const [searchParams, setSearchParams] = useSearchParams();
   const navigate = useNavigate();
-  const [isPending, startTransition] = useTransition();
+  const [isPending, setIsPending] = useState(false);
   const [error, setError] = useState<string | null>(null);
 
   const serviceSlug = searchParams.get('service');
-  const selectedService = serviceSlug ? SERVICES.find(s => s.slug === serviceSlug) || null : null;
+  const selectedService = serviceSlug ? SERVICES.find(s => s.slug === serviceSlug) ?? null : null;
 
   const schema = selectedService ? schemas[selectedService.slug] : globalSchema;
   
@@ -44,23 +45,26 @@ const BookingForm = () => {
     }
   });
 
-  const onSubmit = async (data: any) => {
+  const onSubmit = async (data: Record<string, unknown>) => {
     if (!selectedService) return;
     
     setError(null);
-    startTransition(async () => {
+    setIsPending(true);
+    try {
       const result = await submitBooking(data, selectedService.slug, selectedService.name);
       if (result.success) {
         navigate(ROUTES.THANK_YOU);
       } else {
         setError(result.error || 'Failed to submit booking. Please try again.');
       }
-    });
+    } finally {
+      setIsPending(false);
+    }
   };
 
-  const handleServiceSelect = (service: any) => {
+  const handleServiceSelect = (service: Service) => {
     setSearchParams({ service: service.slug });
-    reset(); // Reset form when switching services
+    reset();
   };
 
   const handleBack = () => {

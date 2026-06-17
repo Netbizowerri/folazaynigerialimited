@@ -102,12 +102,13 @@ const EstatePage = () => {
              className="relative"
           >
             <div className="rounded-[3rem] overflow-hidden shadow-2xl aspect-[4/5]">
-               <img 
-                 src="https://i.ibb.co/gLrZHZMS/FOLAZAY-14.jpg" 
-                 alt="Residential Development" 
-                 className="w-full h-full object-cover"
-                 referrerPolicy="no-referrer"
-               />
+                <img 
+                  src="https://i.ibb.co/gLrZHZMS/FOLAZAY-14.jpg" 
+                  alt="Residential Development" 
+                  className="w-full h-full object-cover"
+                  loading="lazy"
+                  referrerPolicy="no-referrer"
+                />
             </div>
             <div className="absolute -bottom-10 -right-10 bg-[#DDAF2D] p-8 rounded-3xl text-center shadow-xl hidden md:block">
                <p className="text-[#1C1C1C] font-black text-4xl">100%</p>

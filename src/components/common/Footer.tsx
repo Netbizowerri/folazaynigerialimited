@@ -1,5 +1,5 @@
 import { Link } from 'react-router-dom';
-import { Envelope, Phone, MapPin, FacebookLogo, TwitterLogo, LinkedinLogo, WhatsappLogo } from '@phosphor-icons/react';
+import { Envelope, Phone, MapPin, FacebookLogo, TwitterLogo, LinkedinLogo, WhatsappLogo, ArrowRight } from '@phosphor-icons/react';
 import { ROUTES } from '../../constants/routes';
 import { SERVICES } from '../../constants/services';
 
@@ -16,6 +16,7 @@ const Footer = () => {
               src="https://i.ibb.co/XxFRVs5f/FOLAZAY-1.png" 
               alt="Folazay Logo" 
               className="h-11 md:h-[62px] w-auto object-contain"
+              loading="lazy"
               referrerPolicy="no-referrer"
             />
           </Link>
@@ -26,18 +27,22 @@ const Footer = () => {
             Folazay Nigeria Limited is a premier multi-sector firm dedicated to professional excellence and sustainable growth across Nigeria.
           </p>
           <div className="flex items-center gap-4">
-            <a href="#" className="w-8 h-8 rounded-full bg-gray-800 flex items-center justify-center hover:bg-[#DDAF2D] hover:text-[#1C1C1C] transition-all">
-              <FacebookLogo size={18} />
-            </a>
-            <a href="#" className="w-8 h-8 rounded-full bg-gray-800 flex items-center justify-center hover:bg-[#DDAF2D] hover:text-[#1C1C1C] transition-all">
-              <TwitterLogo size={18} />
-            </a>
-            <a href="#" className="w-8 h-8 rounded-full bg-gray-800 flex items-center justify-center hover:bg-[#DDAF2D] hover:text-[#1C1C1C] transition-all">
-              <LinkedinLogo size={18} />
-            </a>
-            <a href="#" className="w-8 h-8 rounded-full bg-gray-800 flex items-center justify-center hover:bg-[#DDAF2D] hover:text-[#1C1C1C] transition-all">
-              <WhatsappLogo size={18} />
-            </a>
+            {[
+              { href: "https://facebook.com/folazayng", icon: FacebookLogo },
+              { href: "https://twitter.com/folazayng", icon: TwitterLogo },
+              { href: "https://linkedin.com/company/folazayng", icon: LinkedinLogo },
+              { href: "https://wa.me/2348029062319", icon: WhatsappLogo },
+            ].map(({ href, icon: Icon }) => (
+              <a
+                key={href}
+                href={href}
+                target="_blank"
+                rel="noopener noreferrer"
+                className="w-9 h-9 rounded-full bg-gray-800 flex items-center justify-center hover:bg-[#DDAF2D] hover:text-[#1C1C1C] transition-all duration-300 hover:scale-110"
+              >
+                <Icon size={16} />
+              </a>
+            ))}
           </div>
         </div>
 
@@ -48,7 +53,7 @@ const Footer = () => {
             <li><Link to={ROUTES.HOME} className="text-gray-400 hover:text-white transition-colors">Home</Link></li>
             <li><Link to={ROUTES.ABOUT} className="text-gray-400 hover:text-white transition-colors">About Us</Link></li>
             <li><Link to={ROUTES.CONTACT} className="text-gray-400 hover:text-white transition-colors">Contact Us</Link></li>
-            <li><Link to={ROUTES.BOOKING} className="text-gray-400 hover:text-white transition-colors font-bold">Book Service</Link></li>
+            <li><Link to={ROUTES.BOOKING} className="inline-flex items-center gap-1 text-gray-400 hover:text-[#DDAF2D] transition-colors font-bold">Book Service <ArrowRight size={14} weight="bold" /></Link></li>
           </ul>
         </div>
 
@@ -63,7 +68,7 @@ const Footer = () => {
                 </Link>
               </li>
             ))}
-            <li><Link to="/services" className="text-[#DDAF2D] hover:underline text-sm font-bold">View All Services</Link></li>
+            <li><Link to="/services" className="inline-flex items-center gap-1 text-[#DDAF2D] hover:gap-2 transition-all text-sm font-bold">View All Services <ArrowRight size={14} weight="bold" /></Link></li>
           </ul>
         </div>
 
@@ -96,12 +101,12 @@ const Footer = () => {
       <div className="border-t border-gray-800 pt-10">
         <div className="max-w-7xl mx-auto px-6 md:px-12 flex flex-col md:flex-row items-center justify-between gap-6">
           <p className="text-gray-500 text-sm text-center md:text-left">
-            © {currentYear} Folazay Nigeria Limited. All Rights Reserved.
+            &copy; {currentYear} Folazay Nigeria Limited. All Rights Reserved.
           </p>
-          <div className="flex gap-8 text-xs text-gray-500 uppercase tracking-widest font-bold">
-            <Link to={ROUTES.PRIVACY} className="hover:text-white">Privacy Policy</Link>
-            <Link to={ROUTES.TERMS} className="hover:text-white">Terms & Conditions</Link>
-            <Link to={ROUTES.DISCLAIMER} className="hover:text-white">Disclaimer</Link>
+          <div className="flex flex-wrap justify-center gap-6 text-xs text-gray-500 uppercase tracking-[0.15em] font-semibold">
+            <Link to={ROUTES.PRIVACY} className="hover:text-white transition-colors">Privacy Policy</Link>
+            <Link to={ROUTES.TERMS} className="hover:text-white transition-colors">Terms &amp; Conditions</Link>
+            <Link to={ROUTES.DISCLAIMER} className="hover:text-white transition-colors">Disclaimer</Link>
           </div>
         </div>
       </div>

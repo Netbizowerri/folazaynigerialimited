@@ -1,32 +1,43 @@
 import { motion } from 'motion/react';
 import { Link } from 'react-router-dom';
+import { Compass, ArrowRight } from '@phosphor-icons/react';
 import Button from '../common/Button';
 import { ROUTES } from '../../constants/routes';
 
+const floatingAnimation = {
+  y: [0, -8, 0],
+  transition: { duration: 4, repeat: Infinity, ease: "easeInOut" },
+};
+
 const HeroSection = () => {
   return (
-    <section className="relative h-[45vh] lg:h-[65vh] min-h-[400px] flex items-center overflow-hidden bg-[#12385D]">
-      {/* Background Image with Overlay */}
+    <section className="relative h-[50vh] lg:h-[70vh] min-h-[500px] flex items-center overflow-hidden bg-[#12385D]">
+      {/* Background Image */}
       <div className="absolute inset-0 z-0 overflow-hidden">
-        <motion.img 
+        <motion.img
           initial={{ scale: 1 }}
-          animate={{ scale: 1.2 }}
-          transition={{ 
-            duration: 25, 
-            repeat: Infinity, 
-            repeatType: "reverse", 
-            ease: "easeInOut" 
-          }}
-          src="https://i.ibb.co/SDdT3N0k/Folazay-Nigeria-Limited.jpg" 
-          alt="Folazay Nigeria Limited Corporate Office" 
-          className="w-full h-full object-cover opacity-60"
+          animate={{ scale: 1.15 }}
+          transition={{ duration: 20, repeat: Infinity, repeatType: "reverse", ease: "easeInOut" }}
+          src="https://i.ibb.co/SDdT3N0k/Folazay-Nigeria-Limited.jpg"
+          alt=""
+          className="w-full h-full object-cover opacity-50"
           referrerPolicy="no-referrer"
         />
-        <div className="absolute inset-0 bg-gradient-to-r from-[#1A5086] via-[#1A5086]/40 to-transparent md:bg-gradient-to-r md:from-[#1A5086]/90 md:via-[#12385D]/70 md:to-transparent" />
+        <div className="absolute inset-0 bg-gradient-to-r from-[#1A5086]/95 via-[#1A5086]/60 to-transparent" />
       </div>
 
-      {/* Decorative Gradients */}
-      <div className="absolute top-0 right-0 w-[400px] h-[400px] bg-[#DDAF2D] rounded-full blur-[150px] opacity-10 -mr-64 -mt-64" />
+      {/* Decorative elements */}
+      <motion.div
+        animate={{ rotate: 360 }}
+        transition={{ duration: 60, repeat: Infinity, ease: "linear" }}
+        className="absolute -top-32 -right-32 w-[500px] h-[500px] border-2 border-[#DDAF2D]/10 rounded-full"
+      />
+      <motion.div
+        animate={{ rotate: -360 }}
+        transition={{ duration: 45, repeat: Infinity, ease: "linear" }}
+        className="absolute -top-16 -right-16 w-[350px] h-[350px] border border-[#DDAF2D]/15 rounded-full"
+      />
+      <div className="absolute top-1/4 right-1/4 w-[300px] h-[300px] bg-[#DDAF2D] rounded-full blur-[120px] opacity-10" />
 
       {/* Content */}
       <div className="relative z-10 max-w-7xl mx-auto px-6 md:px-12 w-full">
@@ -34,59 +45,69 @@ const HeroSection = () => {
           <motion.div
             initial={{ opacity: 0, x: -20 }}
             animate={{ opacity: 1, x: 0 }}
-            transition={{ duration: 0.8 }}
-            className="mb-4 inline-block"
+            transition={{ duration: 0.6 }}
+            className="mb-5"
           >
-            <span className="bg-[#DDAF2D] text-[#1C1C1C] px-4 py-1.5 rounded-full text-[10px] md:text-sm font-black uppercase tracking-[0.2em]">
+            <span className="inline-flex items-center gap-2 bg-[#DDAF2D]/20 backdrop-blur-sm text-[#DDAF2D] px-4 py-2 rounded-full text-xs md:text-sm font-semibold uppercase tracking-[0.15em] border border-[#DDAF2D]/20">
+              <Compass size={14} weight="bold" />
               Since 2012
             </span>
           </motion.div>
 
           <motion.h1
-            initial={{ opacity: 0, y: 20 }}
+            initial={{ opacity: 0, y: 24 }}
             animate={{ opacity: 1, y: 0 }}
-            transition={{ duration: 0.8, delay: 0.2 }}
-            className="font-heading text-4xl md:text-5xl lg:text-5xl font-black text-white mb-6 md:mb-8 leading-tight selection:bg-[#DDAF2D] selection:text-[#1C1C1C]"
+            transition={{ duration: 0.7, delay: 0.15, ease: [0.25, 0.1, 0.25, 1] }}
+            className="font-heading text-5xl md:text-6xl lg:text-7xl font-black text-white mb-6 leading-[1.1] text-balance"
           >
             Building Wealth <br className="hidden md:block" />
             <span className="text-[#DDAF2D]">Across Sectors</span>
           </motion.h1>
 
           <motion.p
-            initial={{ opacity: 0, y: 15 }}
+            initial={{ opacity: 0, y: 20 }}
             animate={{ opacity: 1, y: 0 }}
-            transition={{ duration: 0.8, delay: 0.4 }}
-            className="text-sm md:text-xl text-gray-200 mb-10 max-w-lg leading-relaxed font-medium"
+            transition={{ duration: 0.7, delay: 0.3, ease: [0.25, 0.1, 0.25, 1] }}
+            className="text-base md:text-xl text-gray-200/90 mb-10 max-w-lg leading-relaxed font-light"
           >
             Your trusted multi-sector partner in Real Estate, Agriculture, Energy, and Financial Growth in Nigeria.
           </motion.p>
 
           <motion.div
-            initial={{ opacity: 0, y: 15 }}
+            initial={{ opacity: 0, y: 20 }}
             animate={{ opacity: 1, y: 0 }}
-            transition={{ duration: 0.8, delay: 0.6 }}
+            transition={{ duration: 0.7, delay: 0.45 }}
             className="flex flex-wrap items-center gap-4"
           >
-            <Button 
-              LinkComponent={Link} 
-              to={ROUTES.BOOKING} 
-              variant="secondary" 
-              size="md"
-              className="md:px-8 shadow-xl shadow-black/20"
+            <Button
+              LinkComponent={Link}
+              to={ROUTES.BOOKING}
+              variant="secondary"
+              size="lg"
+              className="md:px-10 shadow-2xl shadow-black/30"
             >
-              Book Service
+              Book Service <ArrowRight className="ml-2" weight="bold" size={18} />
             </Button>
-            <Button 
+            <Button
               onClick={() => document.getElementById('services-preview')?.scrollIntoView({ behavior: 'smooth' })}
-              variant="outline" 
-              size="md"
-              className="border-white/50 text-white hover:bg-white hover:text-[#1A5086] hidden sm:inline-flex"
+              variant="outline"
+              size="lg"
+              className="border-white/30 text-white hover:bg-white hover:text-[#1A5086] hidden sm:inline-flex"
             >
               Explore Now
             </Button>
           </motion.div>
         </div>
       </div>
+
+      {/* Scroll indicator */}
+      <motion.div
+        animate={floatingAnimation}
+        className="absolute bottom-8 left-1/2 -translate-x-1/2 hidden md:flex flex-col items-center gap-2 text-white/40"
+      >
+        <span className="text-[10px] uppercase tracking-[0.2em] font-semibold">Scroll</span>
+        <div className="w-px h-8 bg-gradient-to-b from-white/40 to-transparent" />
+      </motion.div>
     </section>
   );
 };
