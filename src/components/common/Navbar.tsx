@@ -59,130 +59,132 @@ const Navbar = () => {
   ];
 
   return (
-    <header 
-      className={cn(
-        "fixed top-0 left-0 w-full z-[10000] transition-all duration-500 py-2.5 md:py-4",
-        (isScrolled || isOpen) 
-          ? "bg-white/80 backdrop-blur-xl shadow-lg shadow-black/5 py-2 md:py-3 border-b border-gray-100/50" 
-          : "bg-transparent"
-      )}
-    >
-      <div className="max-w-7xl mx-auto px-6 md:px-12 flex items-center justify-between">
-        {/* Logo */}
-        <Link to="/" className="flex items-center gap-2 md:gap-3 group relative z-[10001]">
-          <img 
-            src="https://i.ibb.co/XxFRVs5f/FOLAZAY-1.png" 
-            alt="Folazay Logo" 
-            className="h-[46px] md:h-[53px] w-auto object-contain"
-            referrerPolicy="no-referrer"
-          />
-        </Link>
+    <>
+      <header 
+        className={cn(
+          "fixed top-0 left-0 w-full z-[10000] transition-all duration-500 py-2.5 md:py-4",
+          (isScrolled || isOpen) 
+            ? "bg-white/80 backdrop-blur-xl shadow-lg shadow-black/5 py-2 md:py-3 border-b border-gray-100/50" 
+            : "bg-transparent"
+        )}
+      >
+        <div className="max-w-7xl mx-auto px-6 md:px-12 flex items-center justify-between">
+          {/* Logo */}
+          <Link to="/" className="flex items-center gap-2 md:gap-3 group relative z-[10001]">
+            <img 
+              src="https://i.ibb.co/XxFRVs5f/FOLAZAY-1.png" 
+              alt="Folazay Logo" 
+              className="h-[46px] md:h-[53px] w-auto object-contain"
+              referrerPolicy="no-referrer"
+            />
+          </Link>
 
-        {/* Desktop Nav */}
-        <nav className="hidden lg:flex items-center gap-10">
-          {navLinks.slice(0, 2).map((link) => (
-            <Link 
-              key={link.path} 
-              to={link.path}
-              className={cn(
-                "text-sm font-bold tracking-wide hover:text-[#1A5086] transition-all relative group",
-                location.pathname === link.path ? "text-[#1A5086]" : "text-[#1C1C1C]/70"
-              )}
+          {/* Desktop Nav */}
+          <nav className="hidden lg:flex items-center gap-10">
+            {navLinks.slice(0, 2).map((link) => (
+              <Link 
+                key={link.path} 
+                to={link.path}
+                className={cn(
+                  "text-sm font-bold tracking-wide hover:text-[#1A5086] transition-all relative group",
+                  location.pathname === link.path ? "text-[#1A5086]" : "text-[#1C1C1C]/70"
+                )}
+              >
+                {link.name}
+                <span className={cn(
+                  "absolute -bottom-1 left-0 w-0 h-0.5 bg-[#DDAF2D] transition-all duration-300 group-hover:w-full",
+                  location.pathname === link.path ? "w-full" : ""
+                )} />
+              </Link>
+            ))}
+
+            {/* Services Dropdown */}
+            <div 
+              className="relative"
+              onMouseEnter={() => setIsServicesOpen(true)}
+              onMouseLeave={() => setIsServicesOpen(false)}
             >
-              {link.name}
-              <span className={cn(
-                "absolute -bottom-1 left-0 w-0 h-0.5 bg-[#DDAF2D] transition-all duration-300 group-hover:w-full",
-                location.pathname === link.path ? "w-full" : ""
-              )} />
-            </Link>
-          ))}
-
-          {/* Services Dropdown */}
-          <div 
-            className="relative"
-            onMouseEnter={() => setIsServicesOpen(true)}
-            onMouseLeave={() => setIsServicesOpen(false)}
-          >
-            <button className={cn(
-              "text-sm font-bold tracking-wide flex items-center gap-1 hover:text-[#1A5086] transition-all",
-              location.pathname.startsWith('/services') ? "text-[#1A5086]" : "text-[#1C1C1C]/70"
-            )}>
-              Services <ChevronDown size={14} className={cn("transition-transform duration-300", isServicesOpen ? "rotate-180" : "")} />
-            </button>
-            
-            <AnimatePresence>
-              {isServicesOpen && (
-                <motion.div 
-                  initial={{ opacity: 0, y: 20, scale: 0.95 }}
-                  animate={{ opacity: 1, y: 0, scale: 1 }}
-                  exit={{ opacity: 0, y: 10, scale: 0.95 }}
-                  transition={{ type: "spring", stiffness: 300, damping: 20 }}
-                  className="absolute top-full -left-10 w-80 bg-white shadow-2xl rounded-2xl mt-4 p-3 overflow-hidden border border-gray-100/50 backdrop-blur-xl"
-                >
-                  <div className="grid grid-cols-1 gap-1">
-                    {SERVICES.map((service) => (
-                      <Link
-                        key={service.id}
-                        to={service.path}
-                        className="group flex items-center gap-3 p-3 rounded-xl hover:bg-[#1A5086]/5 transition-all"
+              <button className={cn(
+                "text-sm font-bold tracking-wide flex items-center gap-1 hover:text-[#1A5086] transition-all",
+                location.pathname.startsWith('/services') ? "text-[#1A5086]" : "text-[#1C1C1C]/70"
+              )}>
+                Services <ChevronDown size={14} className={cn("transition-transform duration-300", isServicesOpen ? "rotate-180" : "")} />
+              </button>
+              
+              <AnimatePresence>
+                {isServicesOpen && (
+                  <motion.div 
+                    initial={{ opacity: 0, y: 20, scale: 0.95 }}
+                    animate={{ opacity: 1, y: 0, scale: 1 }}
+                    exit={{ opacity: 0, y: 10, scale: 0.95 }}
+                    transition={{ type: "spring", stiffness: 300, damping: 20 }}
+                    className="absolute top-full -left-10 w-80 bg-white shadow-2xl rounded-2xl mt-4 p-3 overflow-hidden border border-gray-100/50 backdrop-blur-xl"
+                  >
+                    <div className="grid grid-cols-1 gap-1">
+                      {SERVICES.map((service) => (
+                        <Link
+                          key={service.id}
+                          to={service.path}
+                          className="group flex items-center gap-3 p-3 rounded-xl hover:bg-[#1A5086]/5 transition-all"
+                        >
+                          <div className="w-10 h-10 rounded-lg bg-gray-50 flex items-center justify-center text-gray-400 group-hover:bg-white group-hover:text-[#1A5086] group-hover:shadow-sm transition-all">
+                            <service.icon size={20} />
+                          </div>
+                          <div className="flex flex-col">
+                            <span className="text-xs font-bold text-[#1C1C1C] group-hover:text-[#1A5086] transition-colors">{service.name}</span>
+                            <span className="text-[10px] text-gray-400 line-clamp-1">{service.tagline}</span>
+                          </div>
+                        </Link>
+                      ))}
+                      <Link 
+                        to={ROUTES.BOOKING} 
+                        className="mt-2 flex items-center justify-between p-3 rounded-xl bg-[#1A5086]/5 group hover:bg-[#1A5086] transition-all"
                       >
-                        <div className="w-10 h-10 rounded-lg bg-gray-50 flex items-center justify-center text-gray-400 group-hover:bg-white group-hover:text-[#1A5086] group-hover:shadow-sm transition-all">
-                          <service.icon size={20} />
-                        </div>
-                        <div className="flex flex-col">
-                          <span className="text-xs font-bold text-[#1C1C1C] group-hover:text-[#1A5086] transition-colors">{service.name}</span>
-                          <span className="text-[10px] text-gray-400 line-clamp-1">{service.tagline}</span>
-                        </div>
+                        <span className="text-xs font-black uppercase tracking-wider text-[#1A5086] group-hover:text-white">Start Booking</span>
+                        <ArrowRight size={14} className="text-[#1A5086] group-hover:text-white" />
                       </Link>
-                    ))}
-                    <Link 
-                      to={ROUTES.BOOKING} 
-                      className="mt-2 flex items-center justify-between p-3 rounded-xl bg-[#1A5086]/5 group hover:bg-[#1A5086] transition-all"
-                    >
-                      <span className="text-xs font-black uppercase tracking-wider text-[#1A5086] group-hover:text-white">Start Booking</span>
-                      <ArrowRight size={14} className="text-[#1A5086] group-hover:text-white" />
-                    </Link>
-                  </div>
-                </motion.div>
-              )}
-            </AnimatePresence>
+                    </div>
+                  </motion.div>
+                )}
+              </AnimatePresence>
+            </div>
+
+            {navLinks.slice(2).map((link) => (
+              <Link 
+                key={link.path} 
+                to={link.path}
+                className={cn(
+                  "text-sm font-bold tracking-wide hover:text-[#1A5086] transition-all relative group",
+                  location.pathname === link.path ? "text-[#1A5086]" : "text-[#1C1C1C]/70"
+                )}
+              >
+                {link.name}
+                <span className={cn(
+                  "absolute -bottom-1 left-0 w-0 h-0.5 bg-[#DDAF2D] transition-all duration-300 group-hover:w-full",
+                  location.pathname === link.path ? "w-full" : ""
+                )} />
+              </Link>
+            ))}
+          </nav>
+
+          {/* CTA Button */}
+          <div className="hidden lg:block">
+            <Button LinkComponent={Link} to={ROUTES.BOOKING} variant="secondary" className="px-8 shadow-lg shadow-[#DDAF2D]/10">
+              Book a Service
+            </Button>
           </div>
 
-          {navLinks.slice(2).map((link) => (
-            <Link 
-              key={link.path} 
-              to={link.path}
-              className={cn(
-                "text-sm font-bold tracking-wide hover:text-[#1A5086] transition-all relative group",
-                location.pathname === link.path ? "text-[#1A5086]" : "text-[#1C1C1C]/70"
-              )}
-            >
-              {link.name}
-              <span className={cn(
-                "absolute -bottom-1 left-0 w-0 h-0.5 bg-[#DDAF2D] transition-all duration-300 group-hover:w-full",
-                location.pathname === link.path ? "w-full" : ""
-              )} />
-            </Link>
-          ))}
-        </nav>
-
-        {/* CTA Button */}
-        <div className="hidden lg:block">
-          <Button LinkComponent={Link} to={ROUTES.BOOKING} variant="secondary" className="px-8 shadow-lg shadow-[#DDAF2D]/10">
-            Book a Service
-          </Button>
+          {/* Mobile Toggle */}
+          <button 
+            className="lg:hidden relative z-[10010] w-10 h-10 flex items-center justify-center rounded-full bg-gray-50 text-[#1C1C1C] transition-all hover:bg-gray-100 shadow-sm"
+            onClick={() => setIsOpen(!isOpen)}
+          >
+            {isOpen ? <X size={24} /> : <Menu size={24} />}
+          </button>
         </div>
+      </header>
 
-        {/* Mobile Toggle */}
-        <button 
-          className="lg:hidden relative z-[10010] w-10 h-10 flex items-center justify-center rounded-full bg-gray-50 text-[#1C1C1C] transition-all hover:bg-gray-100 shadow-sm"
-          onClick={() => setIsOpen(!isOpen)}
-        >
-          {isOpen ? <X size={24} /> : <Menu size={24} />}
-        </button>
-      </div>
-
-      {/* Mobile Menu Tray */}
+      {/* Mobile Menu Tray - rendered outside header to avoid stacking context issues */}
       <AnimatePresence>
         {isOpen && (
           <motion.div
@@ -190,7 +192,7 @@ const Navbar = () => {
             animate={{ opacity: 1, x: 0 }}
             exit={{ opacity: 0, x: '100%' }}
             transition={{ type: "spring", damping: 30, stiffness: 300 }}
-            className="lg:hidden fixed inset-0 bg-white z-[10005] flex flex-col pt-24 px-6 pb-10 overflow-y-auto scrollbar-hide"
+            className="fixed inset-0 bg-white z-[99999] flex flex-col pt-24 px-6 pb-10 overflow-y-auto lg:hidden"
           >
             {/* Nav List */}
             <div className="flex flex-col gap-2">
@@ -307,7 +309,7 @@ const Navbar = () => {
           </motion.div>
         )}
       </AnimatePresence>
-    </header>
+    </>
   );
 };
 
